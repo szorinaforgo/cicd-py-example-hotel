@@ -1,9 +1,11 @@
 import time
+
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-import allure
-import pytest
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestHootel(object):
@@ -14,7 +16,7 @@ class TestHootel(object):
         # options.add_argument('--headless')
         self.browser = webdriver.Chrome(options=options)
         self.browser.get(URL)
-        self.browser.set_window_size(1920, 1080) # itt nem volt elérhető az egyik gomb kis képernyőn
+        self.browser.set_window_size(1920, 1080)  # itt nem volt elérhető az egyik gomb kis képernyőn
 
         print(self.browser.get_window_size())
 
@@ -40,6 +42,7 @@ class TestHootel(object):
         time.sleep(1)
 
         logout_btn = self.browser.find_element(By.ID, 'logout-link')
+        logout_btn = WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, 'logout-link')))
 
         assert logout_btn.text == "Kilépés"
 
