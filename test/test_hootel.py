@@ -41,7 +41,6 @@ class TestHootel(object):
         submit_btn.click()
         time.sleep(1)
 
-        logout_btn = self.browser.find_element(By.ID, 'logout-link')
         logout_btn = WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, 'logout-link')))
 
         assert logout_btn.text == "Kilépés"
