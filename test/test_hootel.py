@@ -11,9 +11,12 @@ class TestHootel(object):
         URL = 'http://hotel-v3.progmasters.hu/'
         options = Options()
         options.add_experimental_option("detach", True)
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         self.browser = webdriver.Chrome(options=options)
         self.browser.get(URL)
+        self.browser.set_window_size(1920, 1080) # itt nem volt elérhető az egyik gomb kis képernyőn
+
+        print(self.browser.get_window_size())
 
     def teardown_method(self):
         self.browser.quit()
